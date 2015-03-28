@@ -19,7 +19,17 @@ var Todo = mongoose.model('Todo', {
 	}
 });
 
-//app.get('/api/todos') -> search
+app.get('/api/todos', function (req, res) {
+	Todo.find({}, function (err, todos) {
+		if (err) {
+			console.error(err);
+			res.status(500).end()
+		} else {
+			res.json(todos);
+		}
+	});
+});
+
 //app.get('/api/todos/:todoId') -> get one
 
 app.post('/api/todos', function (req, res) {
