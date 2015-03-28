@@ -36,7 +36,7 @@ app.get('/api/todos', function (req, res) {
 	Todo.find(filter, function (err, todos) {
 		if (err) {
 			console.error(err);
-			res.status(500).end()
+			res.status(500).end();
 		} else {
 			res.json(todos);
 		}
@@ -64,7 +64,7 @@ app.post('/api/todos', function (req, res) {
 	Todo.create(req.body, function(err, todo) {
 		if (err) {
 			console.error(err);
-			res.status(500).end()
+			res.status(500).end();
 		} else {
 			res.json(todo);
 		}
@@ -73,7 +73,18 @@ app.post('/api/todos', function (req, res) {
 
 //app.put('/api/todos/:todoId') -> update one
 //app.patch('/api/todos/:todoId') -> update one
-//app.delete('/api/todos/:todoId') -> delete one
+
+app.delete('/api/todos/:todoId', function (req, res) {
+	var todoId = req.params.todoId;
+	Todo.remove({ _id: todoId }, function (err) {
+		if (err) {
+			console.error(err);
+			res.status(500).end();
+		} else {
+			res.send();
+		}
+	})
+});
 
 var db = mongoose.connection;
 db.on('error', function (err){
