@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "supervisor server.js"
   },
   "author": "Eugene Mirotin <emirotin@gmail.com>",
   "license": "MIT",
@@ -13,5 +14,8 @@
     "compression": "^1.4.3",
     "express": "^4.12.3",
     "mongoose": "^4.0.0"
+  },
+  "devDependencies": {
+    "supervisor": "^0.6.0"
   }
 }
