@@ -30,7 +30,22 @@ app.get('/api/todos', function (req, res) {
 	});
 });
 
-//app.get('/api/todos/:todoId') -> get one
+app.get('/api/todos/:todoId', function (req, res) {
+	var todoId = req.params.todoId;
+	Todo.findById(todoId, function (err, todo) {
+		if (err) {
+			if (err.message.match(/Cast to ObjectId failed/)) {
+				return res.status(404).end();
+			}
+			console.error(err);
+			return res.status(500).end();
+		}
+		if (!todo) {
+			return res.status(404).end();
+		}
+		res.json(todo);
+	});
+});
 
 app.post('/api/todos', function (req, res) {
 	Todo.create(req.body, function(err, todo) {
