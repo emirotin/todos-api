@@ -20,7 +20,20 @@ var Todo = mongoose.model('Todo', {
 });
 
 app.get('/api/todos', function (req, res) {
-	Todo.find({}, function (err, todos) {
+	var filter = {};
+
+	var completed = req.query.completed;
+	if (completed) {
+		completed = completed.toLowerCase();
+		if (completed !== 'true' && completed !== 'false') {
+			completed = null;
+		}
+	}
+	if (completed) {
+		filter.completed = (completed === 'true');
+	}
+
+	Todo.find(filter, function (err, todos) {
 		if (err) {
 			console.error(err);
 			res.status(500).end()
