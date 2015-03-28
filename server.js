@@ -71,8 +71,29 @@ app.post('/api/todos', function (req, res) {
 	});
 });
 
-//app.put('/api/todos/:todoId') -> update one
-//app.patch('/api/todos/:todoId') -> update one
+app.put('/api/todos/:todoId', function (req, res) {
+	var todoId = req.params.todoId;
+	Todo.update({ _id: todoId }, req.body, function(err) {
+		if (err) {
+			console.error(err);
+			res.status(500).end();
+		} else {
+			res.send();
+		}
+	});
+});
+
+app.patch('/api/todos/:todoId', function (req, res) {
+	var todoId = req.params.todoId;
+	Todo.update({ _id: todoId }, { $set: req.body }, function(err) {
+		if (err) {
+			console.error(err);
+			res.status(500).end();
+		} else {
+			res.send();
+		}
+	});
+});
 
 app.delete('/api/todos/:todoId', function (req, res) {
 	var todoId = req.params.todoId;
