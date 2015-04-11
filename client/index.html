@@ -26,7 +26,9 @@
 					{{#each todos:i}}
 					<tr>
 						<td>
-							<input type="checkbox" checked="{{ this.completed }}">
+							<input
+								type="checkbox" checked="{{ this.completed }}"
+								on-change="completed-changed:{{ this }}">
 						</td>
 						<td>
 							{{#if this.isEditing }}

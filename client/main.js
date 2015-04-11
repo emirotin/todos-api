@@ -33,6 +33,19 @@
 		return false;
 	});
 
+	app.on('completed-changed', function (event, currentTodo) {
+		fetch('/api/todos/' + currentTodo._id, {
+			method: 'PATCH',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ completed: currentTodo.completed })
+		});
+
+		return false;
+	});
+
 	fetch('/api/todos')
 	.then(function(response) {
 		return response.json();
