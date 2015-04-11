@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+		<link rel="stylesheet" href="/main.css">
+
+		<title>Todo Ractive</title>
+	</head>
+	<body>
+		<section class="container">
+			<h1>Todo MVC</h1>
+			<div id="root"></div>
+		</section>
+
+
+		<script type="text/html" id="tmpl-app">
+			<table class="table">
+				<tbody>
+					{{#each todos}}
+					<tr>
+						<td>
+							<input type="checkbox" checked="{{ this.completed }}">
+						</td>
+						<td>{{ this.task }}</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			<table>
+		</script>
+
+		<script src='http://cdn.ractivejs.org/latest/ractive.js'></script>
+		<script src='https://rawgit.com/github/fetch/master/fetch.js'></script>
+		<script src="/main.js"></script>
+	</body>
+</html>

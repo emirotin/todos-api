@@ -5,8 +5,9 @@ var compression = require('compression');
 var mongoose = require('mongoose');
 
 var app = express();
-app.use(bodyParser.json());
 app.use(compression());
+app.use(bodyParser.json());
+app.use(express.static(__dirname + '/client'));
 
 mongoose.connect('mongodb://localhost:27017/todo');
 
@@ -113,7 +114,7 @@ db.on('error', function (err){
 });
 
 db.once('open', function (callback) {
-	var port = 8080;
+	var port = process.env.PORT || 8080;
 	app.listen(port);
 	console.log('Listening on http://localhost:' + port);
 });
