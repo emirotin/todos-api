@@ -12,9 +12,19 @@
 		return false;
 	});
 
-	app.on('save-edit', function(event, i, newTask){
+	app.on('save-edit', function(event, i, currentTodo){
 		app.set('todos.' + i + '.isEditing', false);
-		app.set('todos.' + i + '.task', newTask);
+		app.set('todos.' + i + '.task', currentTodo.newTask);
+
+		fetch('/api/todos/' + currentTodo._id, {
+			method: 'PATCH',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ task: currentTodo.newTask })
+		});
+
 		return false;
 	});
 
